@@ -83,6 +83,7 @@
     <ClInclude Include="CustomFileIO.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="NIE_DEPT.txt" />
     <Text Include="SFT_STAFF.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -8,6 +8,33 @@ namespace SFT
 
 		return IsFileOpenSuccessfully();
 	}//ReadFile
+	
+	void CustomFileIO::LoadFrmFileToVector()
+	{
+		char c = fs.get();
+		std::string Str_Dept;
+
+		while( !fs.eof() )
+		{			
+			if( c == '\n' )
+			{
+				Vec_DeptNames.push_back( Str_Dept );
+				
+				//Empty the String Str_Dept and clear it's flags, if any
+				Str_Dept = "";
+				Str_Dept.clear();
+			}
+			else
+				Str_Dept.push_back( c );
+
+			c = fs.get();
+		
+		}//while
+
+		//Store the last value before end of file
+		Vec_DeptNames.push_back( Str_Dept );
+						
+	}//LoadFrmFileToVector
 
 	bool CustomFileIO::WriteFile()
 	{	
@@ -121,7 +148,7 @@ namespace SFT
 	//Set Basic parameters
 	void CustomFileIO::SetData( CustomFileIO::DataType d )
 	{
-		char reply = 'n';
+		bool EntryComplete = false;
 		std::string CurrQn = "", CurrData = "";
 
 		//Decide which question to ask
@@ -147,7 +174,7 @@ namespace SFT
 				break;		
 		}//switch-case
 
-		while(reply != 'y')
+		while( !EntryComplete )
 		{
 			CurrData = "";//instantiate it with empty string
 			CurrData.clear(); //clear it's flags
@@ -172,12 +199,8 @@ namespace SFT
 				}
 			}//else-if
 
-			std::cout << "You entered " << CurrData << std::endl;
-			std::cout << "Is this correct ?" << std::endl;
-			std::cout << "Please key in y for YES and n for NO." << std::endl;
-			std::cin >> reply;
-
-			Clear_Cin();
+			//Data format is accepted
+			EntryComplete = true;
 		}//while
 
 		//Set the data to the correct variables
@@ -250,8 +273,11 @@ namespace SFT
 
 	void CustomFileIO::Clear_Cin()
 	{
+		//Ignore to the end of line
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cin.clear(); //clear it's flags	
+
+		//clear it's flags
+		std::cin.clear();
 	}//Clear_Cin
 
 	void CustomFileIO::MoveToEndOfFile()

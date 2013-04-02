@@ -9,7 +9,7 @@ int main()
 
 	while( ToExit == 1 )
 	{
-		SFT::CustomFileIO Test_IO(_TXTFILENAME);	
+		SFT::CustomFileIO Test_IO(_TXTFILENAME, _DEPTTXTFILENAME);	
 		SFT::CustomFileIO::DataType DT;	
 
 		if(_WHDEBUG)
