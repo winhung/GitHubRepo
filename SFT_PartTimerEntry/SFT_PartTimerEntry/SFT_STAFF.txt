@@ -19,3 +19,7 @@ HeLL	Fubar	fu@nie.edu.sg	fu
 GUS	Nuiks	nje@nie.edu.sg	jui
 SHIELD	Nick Fury	nick.fury@shield.com	fnick
 ELL	Moron	asd@ef.com	jefg
+English Language & Literacy (ELL)	joshua	w@e.com	moron
+Psycological Studies (PS)	Lex Luthor	lex.luthor@ll.com	lluthor
+Visual & Performing Arts (VPA)	Shakespeare	SSpeare@nie.edu.sg	S
+Mathematics & Mathematics Education (MME)	Michael Jahn	mjahn@nie.edu.sg	mjahn

@@ -45,6 +45,7 @@ namespace SFT
 			std::cout << "Please kindly ensure that it is in the same folder as this program and the file is named as SFT_STAFF.txt" << std::endl;
 			std::cout << "Press enter for me to try again." << std::endl;
 			std::cout << "To quit, please press Ctrl + C" << std::endl;
+			std::cout << std::endl;
 			
 			//As long as user press the enter key with any content
 			if( std::cin.get() )
@@ -94,6 +95,7 @@ namespace SFT
 				<< FullName << " \t " 
 				<< Username << " \t " 
 				<< Email << std::endl;
+			std::cout << std::endl;
 
 			std::cout << "Is this correct ? Key in y for YES and n for NO." << std::endl;
 			std::cin >> Reply;
@@ -150,6 +152,9 @@ namespace SFT
 	{
 		bool EntryComplete = false;
 		std::string CurrQn = "", CurrData = "";
+		
+		//Used only with Department Names
+		unsigned index = 0;
 
 		//Decide which question to ask
 		switch( d )
@@ -180,13 +185,53 @@ namespace SFT
 			CurrData.clear(); //clear it's flags
 
 			std::cout << "Please enter part-timer's " << CurrQn << std::endl;
-			std::getline(std::cin, CurrData);
+						
+			if( d != DataType::DEPT )
+				std::getline(std::cin, CurrData);
 
-			if( d == DataType::USERNAME )
+			if( d == DataType::DEPT )
+			{
+				std::vector<std::string>::iterator VecItr_DeptName 
+					= Vec_DeptNames.begin();
+
+				std::cout << "Key in the number for the respective "
+					 "department you would like to enter..." << std::endl;
+				std::cout << std::endl;
+
+				//Print out all the known dept names from NIE_DEPT.txt
+				for( unsigned int i = 0; 
+					VecItr_DeptName != Vec_DeptNames.end(); 
+					++i, ++VecItr_DeptName )
+				{
+					std::cout << i << ". " << *VecItr_DeptName << std::endl;				
+				}//for				
+
+				bool IsValid = false;
+				while( !IsValid )
+				{					
+					std::cin >> index;
+					
+					Clear_Cin();
+
+					if( index >= Vec_DeptNames.size() )
+					{
+						std::cout << "ERROR : Please enter a value between 0 to " 
+							<< Vec_DeptNames.size() - 1 
+							<< std::endl;
+
+						continue;
+					}//if
+					else
+						IsValid = true;
+				
+				}//while			
+			}//if
+			else if( d == DataType::USERNAME )
 			{
 				if( !VerifyUsernameSyntax(CurrData.c_str()) )
 				{
-					std::cout << "Username format is wrong. No spaces please." << std::endl;
+					std::cout << "ERROR : Username format is wrong. No spaces please." << std::endl;
+					std::cout << std::endl;
 					continue; //restart !
 				}//if
 			}//if
@@ -194,7 +239,7 @@ namespace SFT
 			{
 				if( !VerifyEmailSyntax(CurrData.c_str()) )
 				{
-					std::cout << "Email format is wrong. Please check again." << std::endl;
+					std::cout << "ERROR : Email format is wrong. Please check again." << std::endl;
 					continue; //restart !
 				}
 			}//else-if
@@ -207,7 +252,7 @@ namespace SFT
 		switch( d )
 		{
 			case DEPT:
-				Dept = CurrData;
+				Dept = Vec_DeptNames[index];
 				break;
 
 			case FULLNAME:
@@ -301,7 +346,6 @@ namespace SFT
 
 	unsigned int CustomFileIO::DisplayGoodbyeMsg()
 	{
-		system("explorer.exe ..\\");
 		std::cout << "Part time staff" + FullName + "has been added." << std::endl;
 		std::cout << "Here's what you can do next...." << std::endl;
 		std::cout << "Press and enter 1 to add another entry or" << std::endl;
@@ -313,7 +357,11 @@ namespace SFT
 		while( IsInputWrong )
 		{
 			if(SecondTime)
-				std::cout << "Please key in only 1 or 2 before pressing enter." << std::endl;
+			{
+				std::cout << std::endl;
+				std::cout << "ERROR : Please key in only 1 or 2 before pressing enter." << std::endl;
+				std::cout << std::endl;
+			}
 
 			std::cin >> Input;
 			Clear_Cin();
@@ -328,5 +376,11 @@ namespace SFT
 
 		return Input;
 	}//DisplayGoodbyeMsg
+
+	void CustomFileIO::ManualLoadDeptNames()
+	{
+
+	
+	}//ManualLoadDeptNames
 
 }//SFT

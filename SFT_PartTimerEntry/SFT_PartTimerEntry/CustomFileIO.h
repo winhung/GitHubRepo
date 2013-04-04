@@ -23,6 +23,7 @@ namespace SFT
 		CustomFileIO( char *pSFT_FileName, char *pNIEDEPT_FileName )
 		{
 			std::cout << "Loading......" << std::endl;
+			std::cout << std::endl;
 
 			//Read NIE_DEPT.txt file
 			if( ReadFile( pNIEDEPT_FileName ) )
@@ -32,8 +33,9 @@ namespace SFT
 			}
 			else
 			{
-				std::cout << "Read NIE_DEPT File Failed." << std::endl;
+				std::cout << "WARNING : Read NIE_DEPT File Failed." << std::endl;
 				std::cout << "Program will load embedded department names." << std::endl;
+				ManualLoadDeptNames();
 			}
 
 			//stop reading the NIE Department file
@@ -43,7 +45,7 @@ namespace SFT
 			if( ReadFile( pSFT_FileName ) )
 				std::cout << "Read SFT File Successful." << std::endl;
 			else
-				std::cout << "Read SFT File Failed." << std::endl;
+				std::cout << "ERROR : Read SFT File Failed." << std::endl;
 
 			//init all to empty string, just to be sure
 			Dept , FullName, Username, Email = "";
@@ -82,6 +84,9 @@ namespace SFT
 		//Ensure that user enters a valid email. Meaning, must be seperated by only one '@'
 		bool VerifyEmailSyntax ( const char *pEmail );
 
+		//Will onlu be called if NIE_DEPT.txt file not found
+		void ManualLoadDeptNames();
+
 		//Ending credits
 		unsigned int DisplayGoodbyeMsg();		
 	private:
@@ -96,6 +101,8 @@ namespace SFT
 		std::string Dept, FullName, Username, Email;
 		std::fstream fs;
 		std::vector<std::string> Vec_DeptNames;
+
+		
 	};
 
 

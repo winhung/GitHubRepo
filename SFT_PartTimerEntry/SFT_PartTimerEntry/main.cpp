@@ -17,6 +17,7 @@ int main()
 
 		std::cout << "Welcome to the Student Feedback Part timer input application!" << std::endl;
 		std::cout << "=============================================================" << std::endl;
+		std::cout << std::endl;
 
 		//Enter fullname, department, username and email
 		Test_IO.SetData(DT = SFT::CustomFileIO::DataType::DEPT);
@@ -33,7 +34,8 @@ int main()
 		//Ending credits...
 		ToExit = Test_IO.DisplayGoodbyeMsg();
 	}//while
-
+	
+	//system("explorer.exe ..");
 	system("Pause");
 	return 0;
 
