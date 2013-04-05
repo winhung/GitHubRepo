@@ -90,15 +90,13 @@ namespace SFT
 
 		//Ending credits
 		unsigned int DisplayGoodbyeMsg();		
-	private:
-		//functions
 
 		//To clear the contents in te cin buffer and clear it's flags
 		void Clear_Cin();
 
 		//Move to end of file
 		void MoveToEndOfFile();
-
+	private:
 		//variables
 		std::string Dept, FullName, Username, Email;
 		std::fstream fs;

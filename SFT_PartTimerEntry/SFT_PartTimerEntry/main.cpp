@@ -1,8 +1,6 @@
 #include "CustomFileIO.h"
 #include <string>
 
-
-
 int main()
 {
 	int ToExit = 1;
@@ -39,7 +37,7 @@ int main()
 		ToExit = Test_IO.DisplayGoodbyeMsg();
 	}//while
 	
-	//system("explorer.exe ..");
+	//system("explorer.exe ..\\SFT_STAFF.txt");
 	system("Pause");
 	return 0;
 

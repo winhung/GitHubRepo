@@ -346,7 +346,7 @@ namespace SFT
 
 	unsigned int CustomFileIO::DisplayGoodbyeMsg()
 	{
-		std::cout << "Part time staff" + FullName + "has been added." << std::endl;
+		std::cout << "Part time staff " + FullName + " has been added." << std::endl;
 		std::cout << "Here's what you can do next...." << std::endl;
 		std::cout << "Press and enter 1 to add another entry or" << std::endl;
 		std::cout << "Press and enter 2 to exit" << std::endl;		

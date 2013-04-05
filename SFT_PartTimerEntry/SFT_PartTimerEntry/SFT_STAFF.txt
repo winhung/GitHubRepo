@@ -23,3 +23,8 @@ English Language & Literacy (ELL)	joshua	w@e.com	moron
 Psycological Studies (PS)	Lex Luthor	lex.luthor@ll.com	lluthor
 Visual & Performing Arts (VPA)	Shakespeare	SSpeare@nie.edu.sg	S
 Mathematics & Mathematics Education (MME)	Michael Jahn	mjahn@nie.edu.sg	mjahn
+Visual & Performing Arts (VPA)	Loki	loki@netherealms.com	loki
+Psycological Studies (PS)	Magnus Rex	magnus.rex@someplace.someplace	mrex
+Mathematics & Mathematics Education (MME)	Da Vinci	da.vinci@paris.1600	dvinci
+Mathematics & Mathematics Education (MME)	math teacher	math.teacher@nie.edu.sg	mteacher
+Mathematics & Mathematics Education (MME)	asd	a@a.com	af
