@@ -1,7 +1,7 @@
 #include "CustomFileIO.h"
 #include <string>
 
-#define _WHDEBUG false
+
 
 int main()
 {
@@ -13,7 +13,11 @@ int main()
 		SFT::CustomFileIO::DataType DT;	
 
 		if(_WHDEBUG)
+		{
+			std::cout << "***************DEBUG****************" << std::endl;
 			Test_IO.DisplayContent();
+			std::cout << "************************************" << std::endl;
+		}
 
 		std::cout << "Welcome to the Student Feedback Part timer input application!" << std::endl;
 		std::cout << "=============================================================" << std::endl;

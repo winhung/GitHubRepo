@@ -377,10 +377,26 @@ namespace SFT
 		return Input;
 	}//DisplayGoodbyeMsg
 
-	void CustomFileIO::ManualLoadDeptNames()
+	void CustomFileIO::ManualLoadDeptNames() 
 	{
+		Vec_DeptNames.push_back("Visual & Performing Arts (VPA)");
+		Vec_DeptNames.push_back("Natural Sciences & Science Education (NSSE)");
+		Vec_DeptNames.push_back("Mathematics & Mathematics Education (MME)");
+		Vec_DeptNames.push_back("English Language & Literacy (ELL)");
+		Vec_DeptNames.push_back("Psycological Studies (PS)");
 
-	
+
+		if(_WHDEBUG)
+		{
+			for( std::vector<std::string>::iterator IT = Vec_DeptNames.begin();
+				IT != Vec_DeptNames.end();
+				++IT)
+			{
+				std::cout << "***************DEBUG****************" << std::endl;
+				std::cout << *IT << std::endl;
+				std::cout << "************************************" << std::endl;
+			}//for
+		}//if
 	}//ManualLoadDeptNames
 
 }//SFT

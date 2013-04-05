@@ -5,6 +5,7 @@
 
 #define _TXTFILENAME "SFT_STAFF.txt"
 #define _DEPTTXTFILENAME "NIE_DEPT.txt"
+#define _WHDEBUG false
 
 namespace SFT
 {
@@ -90,8 +91,9 @@ namespace SFT
 		//Ending credits
 		unsigned int DisplayGoodbyeMsg();		
 	private:
-		//function
+		//functions
 
+		//To clear the contents in te cin buffer and clear it's flags
 		void Clear_Cin();
 
 		//Move to end of file
@@ -101,10 +103,6 @@ namespace SFT
 		std::string Dept, FullName, Username, Email;
 		std::fstream fs;
 		std::vector<std::string> Vec_DeptNames;
-
-		
 	};
-
-
 
 }//SFT
