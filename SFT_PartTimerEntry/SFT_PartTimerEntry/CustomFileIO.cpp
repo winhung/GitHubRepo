@@ -1,13 +1,62 @@
+/**
+Author	: Chan Win Hung
+Email	: winhung.chan@nie.edu.sg
+*/
+
 #include "CustomFileIO.h"
 
 namespace SFT
-{	
-	bool CustomFileIO::ReadFile( char *pFilename )
+{
+	//Constructor !!!
+	CustomFileIO::CustomFileIO( char *pSFT_FileName, char *pNIEDEPT_FileName )
+	{
+		std::cout << "Loading......" << std::endl;
+			std::cout << std::endl;
+
+			//Read NIE_DEPT.txt file
+			if( OpenFile( pNIEDEPT_FileName ) )
+			{
+				std::cout << "Read NIE_DEPT File Successful." << std::endl;
+				LoadFrmFileToVector();
+
+				//stop reading the NIE Department file
+				CloseFile();
+			}
+			else
+			{
+				std::cout << "WARNING : Read NIE_DEPT File Failed." << std::endl;
+				std::cout << "Program will load embedded department names." << std::endl;
+				ManualLoadDeptNames();
+			}		
+
+			//Read SFT_STAFF.txt file
+			if( OpenFile( pSFT_FileName ) )
+				std::cout << "Read SFT File Successful." << std::endl;
+			else
+				std::cout << "ERROR : Read SFT File Failed." << std::endl;
+
+			//init all to empty string, just to be sure
+			Dept , FullName, Username, Email = "";
+			
+			std::cout << std::endl;	
+	}//ctor
+
+	CustomFileIO::~CustomFileIO()
+	{
+	
+	}//dtor
+
+	bool CustomFileIO::OpenFile( char *pFilename )
 	{
 		fs.open( pFilename );
 
 		return IsFileOpenSuccessfully();
 	}//ReadFile
+
+	void CustomFileIO::CloseFile()
+	{
+		fs.close();
+	}//CloseFile
 	
 	void CustomFileIO::LoadFrmFileToVector()
 	{
@@ -51,7 +100,7 @@ namespace SFT
 			if( std::cin.get() )
 			{
 				//Try opening the file again
-				ReadFile(_TXTFILENAME);
+				OpenFile(TXTFILENAME);
 
 				//Clear the Cin buffer and all it's flags if any
 				Clear_Cin();
@@ -372,7 +421,7 @@ namespace SFT
 				IsInputWrong = false;
 		}//while
 
-		fs.close(); //close the file stream to save current entry
+		CloseFile();//close the file stream to save current entry
 
 		return Input;
 	}//DisplayGoodbyeMsg
@@ -384,9 +433,9 @@ namespace SFT
 		Vec_DeptNames.push_back("Mathematics & Mathematics Education (MME)");
 		Vec_DeptNames.push_back("English Language & Literacy (ELL)");
 		Vec_DeptNames.push_back("Psycological Studies (PS)");
-
-
-		if(_WHDEBUG)
+		
+		//@ToDo : Shift these test cases else where ?
+		if(WHDEBUG)
 		{
 			for( std::vector<std::string>::iterator IT = Vec_DeptNames.begin();
 				IT != Vec_DeptNames.end();

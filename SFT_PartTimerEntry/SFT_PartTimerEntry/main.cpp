@@ -1,3 +1,8 @@
+/**
+Author	: Chan Win Hung
+Email	: winhung.chan@nie.edu.sg
+*/
+
 #include "CustomFileIO.h"
 #include <string>
 
@@ -7,10 +12,11 @@ int main()
 
 	while( ToExit == 1 )
 	{
-		SFT::CustomFileIO Test_IO(_TXTFILENAME, _DEPTTXTFILENAME);	
+		SFT::CustomFileIO Test_IO(TXTFILENAME, DEPTTXTFILENAME);	
 		SFT::CustomFileIO::DataType DT;	
 
-		if(_WHDEBUG)
+		//@ToDo : Shift this test cases to another file ?
+		if(WHDEBUG)
 		{
 			std::cout << "***************DEBUG****************" << std::endl;
 			Test_IO.DisplayContent();

@@ -1,11 +1,17 @@
+/**
+Author	: Chan Win Hung
+Email	: winhung.chan@nie.edu.sg
+*/
+
+
 #include <fstream>
 #include <string>
 #include <iostream> //cout, cin
 #include <vector> //std::vector
 
-#define _TXTFILENAME "SFT_STAFF.txt"
-#define _DEPTTXTFILENAME "NIE_DEPT.txt"
-#define _WHDEBUG false
+#define TXTFILENAME "SFT_STAFF.txt"
+#define DEPTTXTFILENAME "NIE_DEPT.txt"
+#define WHDEBUG false
 
 namespace SFT
 {
@@ -21,48 +27,18 @@ namespace SFT
 		};
 
 		//ctor
-		CustomFileIO( char *pSFT_FileName, char *pNIEDEPT_FileName )
-		{
-			std::cout << "Loading......" << std::endl;
-			std::cout << std::endl;
+		CustomFileIO( char *pSFT_FileName, char *pNIEDEPT_FileName );
 
-			//Read NIE_DEPT.txt file
-			if( ReadFile( pNIEDEPT_FileName ) )
-			{
-				std::cout << "Read NIE_DEPT File Successful." << std::endl;
-				LoadFrmFileToVector();
-			}
-			else
-			{
-				std::cout << "WARNING : Read NIE_DEPT File Failed." << std::endl;
-				std::cout << "Program will load embedded department names." << std::endl;
-				ManualLoadDeptNames();
-			}
-
-			//stop reading the NIE Department file
-			fs.close();
-
-			//Read SFT_STAFF.txt file
-			if( ReadFile( pSFT_FileName ) )
-				std::cout << "Read SFT File Successful." << std::endl;
-			else
-				std::cout << "ERROR : Read SFT File Failed." << std::endl;
-
-			//init all to empty string, just to be sure
-			Dept , FullName, Username, Email = "";
-			
-			std::cout << std::endl;
-		}//ctor
-
-		~CustomFileIO()
-		{
-		}//dtor
+		~CustomFileIO();
 
 		//Function to read file only
-		bool ReadFile( char *pFilename );
+		bool OpenFile( char *pFilename );
 
 		//Function to write file only
 		bool WriteFile();
+
+		//Closes the file
+		void CloseFile();
 
 		//Function to load the contents of the file into an array for NIE Dept
 		void LoadFrmFileToVector();
@@ -96,8 +72,8 @@ namespace SFT
 
 		//Move to end of file
 		void MoveToEndOfFile();
-	private:
-		//variables
+
+	private:		
 		std::string Dept, FullName, Username, Email;
 		std::fstream fs;
 		std::vector<std::string> Vec_DeptNames;

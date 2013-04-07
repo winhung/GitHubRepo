@@ -28,3 +28,6 @@ Psycological Studies (PS)	Magnus Rex	magnus.rex@someplace.someplace	mrex
 Mathematics & Mathematics Education (MME)	Da Vinci	da.vinci@paris.1600	dvinci
 Mathematics & Mathematics Education (MME)	math teacher	math.teacher@nie.edu.sg	mteacher
 Mathematics & Mathematics Education (MME)	asd	a@a.com	af
+Mathematics & Mathematics Education (MME)	mm	ad@s.com	ad
+Visual & Performing Arts (VPA)	Mozart	m@london.com	m
+English Language & Literacy (ELL)	mnone	s@s.cm	simone
