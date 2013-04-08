@@ -29,6 +29,7 @@ namespace SFT
 		//ctor
 		CustomFileIO( char *pSFT_FileName, char *pNIEDEPT_FileName );
 
+		//dtor
 		~CustomFileIO();
 
 		//Function to read file only
@@ -61,7 +62,7 @@ namespace SFT
 		//Ensure that user enters a valid email. Meaning, must be seperated by only one '@'
 		bool VerifyEmailSyntax ( const char *pEmail );
 
-		//Will onlu be called if NIE_DEPT.txt file not found
+		//Will only be called if NIE_DEPT.txt file not found
 		void ManualLoadDeptNames();
 
 		//Ending credits
@@ -72,6 +73,9 @@ namespace SFT
 
 		//Move to end of file
 		void MoveToEndOfFile();
+
+		//Create SFT_STAFF.txt file when loading of it fails
+		void CreateSftStaffFile();
 
 	private:		
 		std::string Dept, FullName, Username, Email;

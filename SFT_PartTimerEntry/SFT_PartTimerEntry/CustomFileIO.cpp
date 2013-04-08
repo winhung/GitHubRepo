@@ -7,7 +7,7 @@ Email	: winhung.chan@nie.edu.sg
 
 namespace SFT
 {
-	//Constructor !!!
+	//Constructor
 	CustomFileIO::CustomFileIO( char *pSFT_FileName, char *pNIEDEPT_FileName )
 	{
 		std::cout << "Loading......" << std::endl;
@@ -16,7 +16,7 @@ namespace SFT
 			//Read NIE_DEPT.txt file
 			if( OpenFile( pNIEDEPT_FileName ) )
 			{
-				std::cout << "Read NIE_DEPT File Successful." << std::endl;
+				std::cout << "Load NIE_DEPT File Successful." << std::endl;
 				LoadFrmFileToVector();
 
 				//stop reading the NIE Department file
@@ -24,16 +24,20 @@ namespace SFT
 			}
 			else
 			{
-				std::cout << "WARNING : Read NIE_DEPT File Failed." << std::endl;
+				std::cout << "WARNING : Load NIE_DEPT File Failed." << std::endl;
 				std::cout << "Program will load embedded department names." << std::endl;
 				ManualLoadDeptNames();
 			}		
 
 			//Read SFT_STAFF.txt file
 			if( OpenFile( pSFT_FileName ) )
-				std::cout << "Read SFT File Successful." << std::endl;
+				std::cout << "Load SFT File Successful." << std::endl;
 			else
-				std::cout << "ERROR : Read SFT File Failed." << std::endl;
+			{
+				std::cout << "ERROR : Load SFT File Failed." << std::endl;
+				std::cout << "ERROR : Unable to Load SFT file, will create one." << std::endl;
+				CreateSftStaffFile();
+			}
 
 			//init all to empty string, just to be sure
 			Dept , FullName, Username, Email = "";
@@ -447,5 +451,11 @@ namespace SFT
 			}//for
 		}//if
 	}//ManualLoadDeptNames
+
+	void CustomFileIO::CreateSftStaffFile()
+	{
+		
+	
+	}//CreateSftStaffFile
 
 }//SFT
