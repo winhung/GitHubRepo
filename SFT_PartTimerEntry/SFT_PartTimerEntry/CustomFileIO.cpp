@@ -41,13 +41,14 @@ namespace SFT
 			std::cout << "Load SFT File Successful." << std::endl;
 
 			//init all to their respective column name
-			Dept = "Department";
+			DeptLong = "Department";
+			DeptAcronym = "XXX";
 			FullName = "Fullname";
 			Username = "Username";
 			Email = "Email";
 
 			//Fix the width according to their department names first
-			DeptCoutWidth = Dept.size(); 
+			DeptAcronymCoutWidth = DeptLong.size(); 
 			FullnameCoutWidth = FullName.size(); 
 			UsernameCoutWidth = Username.size(); 
 			EmailCoutWidth = Email.size();
@@ -101,6 +102,13 @@ namespace SFT
 
 	bool CustomFileIO::WriteFile()
 	{	
+		long SizeOfData = DeptLong.size() + FullName.size() 
+			+ Email.size() + Username.size() + sizeof('\n') + 3*sizeof('\t');
+
+		std::string FullDetails = 
+			'\n' 
+			+ DeptLong + '\t' + FullName + '\t' + Email + '\t' + Username;
+
 		//check if file is opened first
 		while( !IsFileOpenSuccessfully() )
 		{
@@ -123,6 +131,9 @@ namespace SFT
 
 		//Move to one char before EOF
 		MoveToEndOfFile();
+
+		//Write the contents into the file
+		fs.write(FullDetails.c_str(), SizeOfData);
 
 		return true;
 	}//WriteFile
@@ -156,14 +167,13 @@ namespace SFT
 			std::cout << "Here's what you have entered" << std::endl;
 			
 			//Print out the heading first
-			std::cout << std::setw(DeptCoutWidth) << std::left << "Department" << " ";
+			std::cout << std::setw(DeptAcronymCoutWidth) << std::left << "Department" << " ";
 			std::cout << std::setw(FullnameCoutWidth) << std::left << "Fullname" << " ";
 			std::cout << std::setw(UsernameCoutWidth) << std::left << "Username" << " ";
 			std::cout << std::setw(EmailCoutWidth) << std::left << "Email" << std::endl;
 			
 			//Print out the values
-			std::cout << std::setw(DeptCoutWidth) << std::left
-				<< PrintDeptAcronyms(Dept) 
+			std::cout << std::setw(DeptAcronymCoutWidth) << std::left << DeptAcronym
 				<< " ";
 			std::cout << std::setw(FullnameCoutWidth) << std::left << FullName 
 				<< " ";
@@ -333,8 +343,14 @@ namespace SFT
 		switch( d )
 		{
 			case DEPT:
-				CurrData = Vec_DeptNames[index-1]; //since we diplay the values from 1 and not 0
-				Dept = CurrData;
+				//Department names in long format..
+				CurrData = Vec_DeptNames[index-1]; //index-1 because we diplay the values from 1 and not 0
+				DeptLong = CurrData;				
+				
+				//Department names in Acronym format...
+				DeptAcronym = ReturnDeptInAcronyms( CurrData );
+				//Do this to update the CurrData's size
+				CurrData = DeptAcronym;
 				break;
 
 			case FULLNAME:
@@ -411,19 +427,9 @@ namespace SFT
 	}//Clear_Cin
 
 	void CustomFileIO::MoveToEndOfFile()
-	{		
-		long SizeOfData = Dept.size() + FullName.size() 
-			+ Email.size() + Username.size() + sizeof('\n') + 3*sizeof('\t');
-
-		//Position to the end of the text file so start writing from there
+	{
+		//Position to the end of the text file to start writing from there
 		fs.seekg(0, fs.end);
-
-		std::string FullDetails = 
-			'\n' 
-			+ Dept + '\t' + FullName + '\t' + Email + '\t' + Username;
-
-		fs.write(FullDetails.c_str(), SizeOfData);
-	
 	}//MoveToEndOfFile
 
 	unsigned int CustomFileIO::DisplayGoodbyeMsg()
@@ -515,7 +521,7 @@ namespace SFT
 		switch( ColName )
 		{
 			case DEPT:
-				if( SizeOfCurrData > DeptCoutWidth )
+				if( SizeOfCurrData > DeptAcronymCoutWidth )
 					IsWidthWider = true;					
 				break;
 
@@ -549,7 +555,7 @@ namespace SFT
 		switch( ColName )
 		{
 			case DEPT:
-				DeptCoutWidth = Width;
+				DeptAcronymCoutWidth = Width;
 				break;
 
 			case FULLNAME:
@@ -571,16 +577,14 @@ namespace SFT
 		
 	}//SetCoutWidth
 
-	std::string CustomFileIO::PrintDeptAcronyms( std::string DeptName )
+	std::string CustomFileIO::ReturnDeptInAcronyms( std::string DeptName )
 	{
 		std::string::iterator FirstChar, LastChar;
-		std::string DeptAcronym;
+		std::string TempDept;
 
-		LastChar = DeptName.end();
-		FirstChar = LastChar;
-		
-		//Take the last alphabet before ')'
-		--LastChar;
+		//Point LastChar to 1 char before the EOF
+		LastChar = DeptName.end() - 1;
+		FirstChar = LastChar;		
 
 		while( *FirstChar != '(' )
 			--FirstChar;
@@ -588,8 +592,7 @@ namespace SFT
 		//Reached '(', move one step to the alphabet
 		++FirstChar;
 
-		DeptAcronym
-	
+		return TempDept.assign(FirstChar, LastChar);	
 	}//PrintDeptAcronyms
 
 }//SFT

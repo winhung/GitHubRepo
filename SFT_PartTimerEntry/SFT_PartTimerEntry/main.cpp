@@ -35,13 +35,13 @@ int main()
 		Test_IO.DisplayAndVerifyEnteredData();
 
 		//Write the new entry to file
-		Test_IO.WriteFile();
+		if( Test_IO.WriteFile() )
+			std::cout << "Entry created...." << std::endl;
 
 		//Ending credits...
 		ToExit = Test_IO.DisplayGoodbyeMsg();
 	}//while
-	
-	//system("explorer.exe ..\\SFT_STAFF.txt");
+
 	system("Pause");
 	return 0;
 

@@ -9,3 +9,6 @@ Psychological Studies (PS)	asd	zxc@asd.com	wer
 Humanities & Social Studies Education (HSSE)	asd	afd@asd.cd	wef
 Visual & Performing Arts (VPA)	hiag	zero@zero.com	hiag
 English Language & Literature (ELL)	asd	qw@asd.com	fr
+Humanities & Social Studies Education (HSSE)	Chan Win Hung	winhung.chan@nie.edu.sg	whchan
+Asian Languages & Cultures (ALC)	Chan Win Hung	winhung.chan@nie.edu.sg	whchan
+Asian Languages & Cultures (ALC)	ASDQWEQW ASDXCEWR VSDVRWF DVSDFWEFG	alname@nie.edu.sg	ALongName

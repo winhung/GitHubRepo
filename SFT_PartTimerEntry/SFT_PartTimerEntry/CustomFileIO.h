@@ -86,13 +86,13 @@ namespace SFT
 		void SetColCoutWidth( DataType ColName,  unsigned int Width );
 
 		//Find and display only the acronyms of the depts
-		std::string PrintDeptAcronyms( std::string DeptName );
+		std::string ReturnDeptInAcronyms( std::string DeptName );
 
 	private:		
-		std::string Dept, FullName, Username, Email;
+		std::string DeptLong, DeptAcronym, FullName, Username, Email;
 		std::fstream fs;
 		std::vector<std::string> Vec_DeptNames;
-		unsigned int DeptCoutWidth, FullnameCoutWidth, UsernameCoutWidth, EmailCoutWidth;
+		unsigned int DeptAcronymCoutWidth, FullnameCoutWidth, UsernameCoutWidth, EmailCoutWidth;
 	};
 
 }//SFT
