@@ -30,17 +30,27 @@ namespace SFT
 			}		
 
 			//Read SFT_STAFF.txt file
-			if( OpenFile( pSFT_FileName ) )
-				std::cout << "Load SFT File Successful." << std::endl;
-			else
+			while( !OpenFile( pSFT_FileName ) )			
 			{
 				std::cout << "ERROR : Load SFT File Failed." << std::endl;
 				std::cout << "ERROR : Unable to Load SFT file, will create one." << std::endl;
 				CreateSftStaffFile();
-			}
+			}//while
 
-			//init all to empty string, just to be sure
-			Dept , FullName, Username, Email = "";
+			//Reaching here would mean SFT_STAFF file was loaded successfully
+			std::cout << "Load SFT File Successful." << std::endl;
+
+			//init all to their respective column name
+			Dept = "Department";
+			FullName = "Fullname";
+			Username = "Username";
+			Email = "Email";
+
+			//Fix the width according to their department names first
+			DeptCoutWidth = Dept.size(); 
+			FullnameCoutWidth = FullName.size(); 
+			UsernameCoutWidth = Username.size(); 
+			EmailCoutWidth = Email.size();
 			
 			std::cout << std::endl;	
 	}//ctor
@@ -142,12 +152,26 @@ namespace SFT
 
 		while(Reply == 'n')
 		{
+			std::cout << std::endl;
 			std::cout << "Here's what you have entered" << std::endl;
-			std::cout << "Department \t Fullname \t Username \t Email" << std::endl;
-			std::cout << Dept <<" \t " 
-				<< FullName << " \t " 
-				<< Username << " \t " 
-				<< Email << std::endl;
+			
+			//Print out the heading first
+			std::cout << std::setw(DeptCoutWidth) << std::left << "Department" << " ";
+			std::cout << std::setw(FullnameCoutWidth) << std::left << "Fullname" << " ";
+			std::cout << std::setw(UsernameCoutWidth) << std::left << "Username" << " ";
+			std::cout << std::setw(EmailCoutWidth) << std::left << "Email" << std::endl;
+			
+			//Print out the values
+			std::cout << std::setw(DeptCoutWidth) << std::left
+				<< PrintDeptAcronyms(Dept) 
+				<< " ";
+			std::cout << std::setw(FullnameCoutWidth) << std::left << FullName 
+				<< " ";
+			std::cout << std::setw(UsernameCoutWidth) << std::left << Username 
+				<< " ";
+			std::cout << std::setw(EmailCoutWidth) << std::left << Email 
+				<< std::endl;
+			
 			std::cout << std::endl;
 
 			std::cout << "Is this correct ? Key in y for YES and n for NO." << std::endl;
@@ -252,7 +276,7 @@ namespace SFT
 				std::cout << std::endl;
 
 				//Print out all the known dept names from NIE_DEPT.txt
-				for( unsigned int i = 0; 
+				for( unsigned int i = 1; 
 					VecItr_DeptName != Vec_DeptNames.end(); 
 					++i, ++VecItr_DeptName )
 				{
@@ -261,19 +285,23 @@ namespace SFT
 
 				bool IsValid = false;
 				while( !IsValid )
-				{					
-					std::cin >> index;
-					
-					Clear_Cin();
+				{	
+					std::string Input = "";
+					std::getline(std::cin, Input);
 
-					if( index >= Vec_DeptNames.size() )
+					std::stringstream StrStream(Input);
+
+					StrStream >> index;
+
+					if( index == 0 || index > Vec_DeptNames.size() )
 					{
-						std::cout << "ERROR : Please enter a value between 0 to " 
-							<< Vec_DeptNames.size() - 1 
+						std::cout 
+							<< "ERROR : Please enter a value between 1 to " 
+							<< Vec_DeptNames.size() 
 							<< std::endl;
 
 						continue;
-					}//if
+					}
 					else
 						IsValid = true;
 				
@@ -305,7 +333,8 @@ namespace SFT
 		switch( d )
 		{
 			case DEPT:
-				Dept = Vec_DeptNames[index];
+				CurrData = Vec_DeptNames[index-1]; //since we diplay the values from 1 and not 0
+				Dept = CurrData;
 				break;
 
 			case FULLNAME:
@@ -323,6 +352,9 @@ namespace SFT
 			default:
 				break;		
 		}//switch-case
+
+		//Set the cout's width for printing neatly
+		FindBestWidth( d, CurrData.size() );			
 
 	}//SetFullname
 
@@ -344,14 +376,14 @@ namespace SFT
 	//Ensure that user enters a valid email. Meaning, must be seperated by only one '@'
 	bool CustomFileIO::VerifyEmailSyntax ( const char *pEmail )
 	{
-		bool IsOneAt = false, HasAtLeastOneDot = false;
+		bool IsOneAtSign = false, HasAtLeastOneDot = false;
 
 		while(*pEmail)
 		{
 			if(*pEmail == '@')
 			{
-				if(!IsOneAt)
-					IsOneAt = true;
+				if(!IsOneAtSign)
+					IsOneAtSign = true;
 				else
 					return false; //more than one @ found
 			}//if
@@ -363,7 +395,7 @@ namespace SFT
 			++pEmail;
 		}//while
 
-		if(!IsOneAt || !HasAtLeastOneDot)
+		if(!IsOneAtSign || !HasAtLeastOneDot)
 			return false; //Every email should have an '@' and at least one '.'
 
 		return true;
@@ -388,10 +420,7 @@ namespace SFT
 
 		std::string FullDetails = 
 			'\n' 
-			+ Dept + '\t' 
-			+ FullName + '\t' 
-			+ Email + '\t'
-			+ Username;
+			+ Dept + '\t' + FullName + '\t' + Email + '\t' + Username;
 
 		fs.write(FullDetails.c_str(), SizeOfData);
 	
@@ -437,6 +466,16 @@ namespace SFT
 		Vec_DeptNames.push_back("Mathematics & Mathematics Education (MME)");
 		Vec_DeptNames.push_back("English Language & Literacy (ELL)");
 		Vec_DeptNames.push_back("Psycological Studies (PS)");
+		Vec_DeptNames.push_back("Policy & Leadership Studies (PLS)");
+		Vec_DeptNames.push_back("Early Childhood & Special Needs Education (ECSE)");
+		Vec_DeptNames.push_back("Learning Sciences & Technologies (LST)");
+		Vec_DeptNames.push_back("Curriculum, Teaching and Learning (CTL)");
+		Vec_DeptNames.push_back("Asian Languages & Cultures (ALC)");
+		Vec_DeptNames.push_back("Humanities & Social Studies Education (HSSE)");
+		Vec_DeptNames.push_back("Physical Education & Sports Science (PESS)");
+		Vec_DeptNames.push_back("Office of Education Research (OER)");
+		Vec_DeptNames.push_back("Centre for Research in Pedagogy & Practice (CRPP)");
+		Vec_DeptNames.push_back("Learning Sciences Laboratory (LSL)");
 		
 		//@ToDo : Shift these test cases else where ?
 		if(WHDEBUG)
@@ -454,8 +493,103 @@ namespace SFT
 
 	void CustomFileIO::CreateSftStaffFile()
 	{
+		std::cout << "Creating SFT_STAFF.txt file" << std::endl;
+		std::ofstream SteamOut_File;
 		
+		//File cannot be found, hence ofstream will create one
+		SteamOut_File.open("SFT_STAFF.txt");
+
+		//Input the necessary headers for file to work
+		SteamOut_File << "DEPTDESCL\tNAME\tEMAIL\tUSERID";
+
+		//Close it to save the work
+		SteamOut_File.close();
 	
 	}//CreateSftStaffFile
+
+	void CustomFileIO::FindBestWidth
+	( DataType ColName, unsigned int SizeOfCurrData )
+	{
+		bool IsWidthWider = false;
+
+		switch( ColName )
+		{
+			case DEPT:
+				if( SizeOfCurrData > DeptCoutWidth )
+					IsWidthWider = true;					
+				break;
+
+			case FULLNAME:
+				if( SizeOfCurrData > FullnameCoutWidth )
+					IsWidthWider = true;					
+				break;
+
+			case USERNAME:
+				if( SizeOfCurrData > UsernameCoutWidth )
+					IsWidthWider = true;					
+				break;
+
+			case EMAIL:
+				if( SizeOfCurrData > EmailCoutWidth )
+					IsWidthWider = true;					
+				break;
+
+			default:
+				break;
+		
+		}//switch
+
+		if( IsWidthWider )
+			SetColCoutWidth( ColName, SizeOfCurrData );				
+	
+	}//FindBestWidth
+
+	void CustomFileIO::SetColCoutWidth( DataType ColName, unsigned int Width )
+	{
+		switch( ColName )
+		{
+			case DEPT:
+				DeptCoutWidth = Width;
+				break;
+
+			case FULLNAME:
+				FullnameCoutWidth = Width;
+				break;
+
+			case USERNAME:
+				UsernameCoutWidth = Width;
+				break;
+
+			case EMAIL:
+				EmailCoutWidth = Width;
+				break;
+
+			default:
+				break;
+		
+		}//switch
+		
+	}//SetCoutWidth
+
+	std::string CustomFileIO::PrintDeptAcronyms( std::string DeptName )
+	{
+		std::string::iterator FirstChar, LastChar;
+		std::string DeptAcronym;
+
+		LastChar = DeptName.end();
+		FirstChar = LastChar;
+		
+		//Take the last alphabet before ')'
+		--LastChar;
+
+		while( *FirstChar != '(' )
+			--FirstChar;
+
+		//Reached '(', move one step to the alphabet
+		++FirstChar;
+
+		DeptAcronym
+	
+	}//PrintDeptAcronyms
 
 }//SFT

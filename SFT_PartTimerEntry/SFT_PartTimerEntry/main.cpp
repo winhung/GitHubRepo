@@ -19,12 +19,10 @@ int main()
 		if(WHDEBUG)
 		{
 			std::cout << "***************DEBUG****************" << std::endl;
-			Test_IO.DisplayContent();
-			std::cout << "************************************" << std::endl;
+			Test_IO.DisplayContent();			
 		}
 
 		std::cout << "Welcome to the Student Feedback Part timer input application!" << std::endl;
-		std::cout << "=============================================================" << std::endl;
 		std::cout << std::endl;
 
 		//Enter fullname, department, username and email

@@ -1,33 +1,11 @@
 DEPTDESCL	NAME	EMAIL	USERID
-Natural Sciences & Science Education (NSSE)	Sai Lin	sailinnaung@nie.edu.sg	SAILN
-Natural Sciences & Science Education (NSSE)	Sai Lin	sailinnaung@nie.edu.sg	SAILN
-Mathematics & Mathematics Education (MME)	Sai Lin Naung	sailinnaung@nie.edu.sg	SAILN
-Science & Mathematics Cluster	Choy Kwei Heong	kweiheong.choy@nie.edu.sg	khchoy
-Visual & Performing Arts (VPA)	Choy Kwei Heong	kweiheong.choy@nie.edu.sg	SAILN
-Natural Sciences & Science Education (NSSE)	Tan Edison	edison.tan@nie.edu.sg	YSETAN
-Mathematics & Mathematics Education (MME)	Ng Yih Farn	yihfarn.ng@nie.edu.sg	YFNG
-Mathematics & Mathematics Education (MME)	Hazel Aye	hninnu.aye@nie.edu.sg	HNAYE
-Mathematics & Mathematics Education (MME)	Megaman	xx.xxx@nie.edu.sg	xxxxx
-MME	Chan Wai Mun	waimun.chan@nie.edu.sg	wmchan
-CeL	Buakaw	buakaw@nie.edu.sg	bk
-asd	jun	j@nie.edu.sg	j
-asd	cha	cha@nie.edu.sg	ch
-retgrg	gdfs	asd@nie.edu.sg	qwe
-uejd	asdw	juj@nie.edu.sg	iue
-asdqw	grw	awd@nie.edu.sg	zxc
-HeLL	Fubar	fu@nie.edu.sg	fu
-GUS	Nuiks	nje@nie.edu.sg	jui
-SHIELD	Nick Fury	nick.fury@shield.com	fnick
-ELL	Moron	asd@ef.com	jefg
-English Language & Literacy (ELL)	joshua	w@e.com	moron
-Psycological Studies (PS)	Lex Luthor	lex.luthor@ll.com	lluthor
-Visual & Performing Arts (VPA)	Shakespeare	SSpeare@nie.edu.sg	S
-Mathematics & Mathematics Education (MME)	Michael Jahn	mjahn@nie.edu.sg	mjahn
-Visual & Performing Arts (VPA)	Loki	loki@netherealms.com	loki
-Psycological Studies (PS)	Magnus Rex	magnus.rex@someplace.someplace	mrex
-Mathematics & Mathematics Education (MME)	Da Vinci	da.vinci@paris.1600	dvinci
-Mathematics & Mathematics Education (MME)	math teacher	math.teacher@nie.edu.sg	mteacher
-Mathematics & Mathematics Education (MME)	asd	a@a.com	af
-Mathematics & Mathematics Education (MME)	mm	ad@s.com	ad
-Visual & Performing Arts (VPA)	Mozart	m@london.com	m
-English Language & Literacy (ELL)	mnone	s@s.cm	simone
+English Language & Literacy (ELL)	me	me@me.com	me
+English Language & Literacy (ELL)	ko	ok@ok.com	ok
+Visual & Performing Arts (VPA)	joel	j@j.com	j
+Asian Languages & Cultures (ALC)	hji	hji@hji.cin	hji
+English Language & Literature (ELL)	ed	fda@fe.com	fda
+Learning Sciences Laboratory (LSL)	adf	ads@fasdf.com	gre
+Psychological Studies (PS)	asd	zxc@asd.com	wer
+Humanities & Social Studies Education (HSSE)	asd	afd@asd.cd	wef
+Visual & Performing Arts (VPA)	hiag	zero@zero.com	hiag
+English Language & Literature (ELL)	asd	qw@asd.com	fr

@@ -6,8 +6,10 @@ Email	: winhung.chan@nie.edu.sg
 
 #include <fstream>
 #include <string>
-#include <iostream> //cout, cin
+#include <iostream> //std::cout, std::cin
 #include <vector> //std::vector
+#include <sstream> //std::stringstream
+#include <iomanip> //std::setw
 
 #define TXTFILENAME "SFT_STAFF.txt"
 #define DEPTTXTFILENAME "NIE_DEPT.txt"
@@ -77,10 +79,20 @@ namespace SFT
 		//Create SFT_STAFF.txt file when loading of it fails
 		void CreateSftStaffFile();
 
+		//Determine best cout width by finding the largest in string size
+		void FindBestWidth( DataType ColName, unsigned int SizeOfCurrData );
+
+		//Set the cout's width. The string with the most alphabets wins
+		void SetColCoutWidth( DataType ColName,  unsigned int Width );
+
+		//Find and display only the acronyms of the depts
+		std::string PrintDeptAcronyms( std::string DeptName );
+
 	private:		
 		std::string Dept, FullName, Username, Email;
 		std::fstream fs;
 		std::vector<std::string> Vec_DeptNames;
+		unsigned int DeptCoutWidth, FullnameCoutWidth, UsernameCoutWidth, EmailCoutWidth;
 	};
 
 }//SFT
